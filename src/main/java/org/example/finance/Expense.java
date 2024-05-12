@@ -3,40 +3,40 @@ package org.example.finance;
 public class Expense {
     private int id;
     private int userId;
-    private String type;
-    private Double amount;
-    private String date;
+    private String type1;
+    private Double amount1;
+    private String date1;
 
-    public Expense(int userId, String type, Double amount, String date) {
+    public Expense(int userId, String type1, Double amount1, String date1) {
         this.userId = userId;
-        this.type = type;
-        this.amount = amount;
-        this.date = date;
+        this.type1 = type1;
+        this.amount1 = amount1;
+        this.date1 = date1;
     }
     public Expense() {}
 
-    public String gettype() {
-        return type;
+    public String gettype1() {
+        return type1;
     }
 
-    public void settype(String type) {
-        this.type = type;
+    public void settype1(String type1) {
+        this.type1 = type1;
     }
 
-    public Double getamount() {
-        return amount;
+    public Double getamount1() {
+        return amount1;
     }
 
-    public void setamount(Double amount) {
-        this.amount = amount;
+    public void setamount1(Double amount1) {
+        this.amount1 = amount1;
     }
 
-    public String getdate() {
-        return date;
+    public String getdate1() {
+        return date1;
     }
 
-    public void setdate(String date) {
-        this.date = date;
+    public void setdate1(String date1) {
+        this.date1 = date1;
     }
 
     public Integer getid() {

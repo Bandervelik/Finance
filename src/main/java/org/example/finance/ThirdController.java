@@ -23,6 +23,9 @@ public class ThirdController extends Application {
     private Button SaveButton;
 
     @FXML
+    private Button SaveButton1;
+
+    @FXML
     private Button exitBtn11;
 
     @FXML
@@ -38,7 +41,13 @@ public class ThirdController extends Application {
     private TextField amount;
 
     @FXML
+    private TextField amount1;
+
+    @FXML
     private DatePicker date;
+
+    @FXML
+    private DatePicker date1;
 
     private DatabaseHandler databaseHandler;
 
@@ -60,6 +69,10 @@ public class ThirdController extends Application {
 
         SaveButton.setOnAction(event -> {
             saveIncome(userId);
+        });
+
+        SaveButton1.setOnAction(event -> {
+            saveExpense(userId);
         });
 
         backBtn.setOnAction(event -> {
@@ -84,7 +97,7 @@ public class ThirdController extends Application {
             });
         }
     }
-
+    DatabaseHandler dbHandler = new DatabaseHandler();
     private void openNewScene(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -106,8 +119,33 @@ public class ThirdController extends Application {
         alert.showAndWait();
     }
 
+    private void saveExpense(int userId) {
+
+
+        String type = expenseTypeMenuButton.getText();
+        String amount1Text = amount1.getText();
+        LocalDate localDate1 = date1.getValue();
+        String date1String = localDate1.toString();
+
+        // Перевірка, чи всі поля заповнені
+        if (type.isEmpty() || amount1Text.isEmpty() || date1String.isEmpty()) {
+            showAlert("Помилка", "Відсутні дані", "Будь ласка, заповніть усі поля.");
+            return;
+        }
+
+        try {
+            double amount1Value = Double.parseDouble(amount1Text);
+            // Створення об'єкта доходу з отриманими даними
+            Expense expense = new Expense(userId, type, amount1Value, date1String);
+            // Збереження доходу в базу даних
+            dbHandler.addExpense(expense);
+            showAlert("Успіх", "Витрати збережено", "Інформацію про витрату успішно збережено.");
+        } catch (NumberFormatException e) {
+            showAlert("Помилка", "Неправильна сума", "Будь ласка, введіть правильну суму витрати.");
+        }
+    }
+
     private void saveIncome(int userId) {
-        DatabaseHandler dbHandler = new DatabaseHandler();
 
         String type = incomeTypeMenuButton.getText();
         String amountText = amount.getText();

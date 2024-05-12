@@ -1,3 +1,4 @@
+
 package org.example.finance;
 
 import java.sql.Connection;
@@ -57,6 +58,7 @@ public class DatabaseHandler extends Configs {
         }
         return resSet;
     }
+
     public void addIncome(Income income) {
         String insert = "INSERT INTO " + Const.INCOME_TABLE + " (" + Const.INCOME_USER_ID + "," +
                 Const.INCOME_TYPE + "," + Const.INCOME_AMOUNT + "," +
@@ -85,19 +87,15 @@ public class DatabaseHandler extends Configs {
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(insert);
             prSt.setInt(1, expense.getUserId());
-            prSt.setString(2, expense.gettype());
-            prSt.setDouble(3, expense.getamount());
-            prSt.setString(4, expense.getdate());
+            prSt.setString(2, expense.gettype1());
+            prSt.setDouble(3, expense.getamount1());
+            prSt.setString(4, expense.getdate1());
 
             prSt.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
 
     public ResultSet getIncome(int userId) {
         ResultSet resultSet = null;
@@ -125,5 +123,22 @@ public class DatabaseHandler extends Configs {
             e.printStackTrace();
         }
         return resultSet;
+    }
+
+    public void addGoals(Goals goals) {
+        String insert = "INSERT INTO " + Const.GOALS_TABLE + " (" + Const.GOALS_USER_ID + "," +
+                Const.GOAL_TYPE_COLUMN + "," + Const.GOAL_AMOUNT_COLUMN + ")" +
+                "VALUES(?,?,?)";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            prSt.setInt(1, goals.getUserId());
+            prSt.setString(2, goals.getType());
+            prSt.setDouble(3, goals.getAmount());
+
+            prSt.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

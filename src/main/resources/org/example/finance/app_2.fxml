@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #003b46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.finance.ThirdController">
+   <children>
+      <AnchorPane layoutX="50.0" layoutY="100.0" prefHeight="339.0" prefWidth="600.0" style="-fx-background-color: #fafafa; -fx-background-radius: 15;">
+         <children>
+            <TabPane layoutY="-1.0" prefHeight="339.0" prefWidth="608.0" style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: #c4dfe6; -fx-border-color: #07575b;" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab style="-fx-background-color: #c4dfe6;" text="Дохід">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="270.0" prefWidth="507.0" style="-fx-background-radius: 15; -fx-background-color: #c4dfe6;">
+                           <children>
+                              <AnchorPane layoutX="22.0" layoutY="20.0" />
+                              <TextField fx:id="amount" layoutX="412.0" layoutY="24.0" prefHeight="35.0" prefWidth="179.0" promptText="Сумма доходу" style="-fx-background-radius: 15; -fx-background-color: #66a5ad;">
+                                 <font>
+                                    <Font name="Comic Sans MS" size="17.0" />
+                                 </font></TextField>
+                              <DatePicker fx:id="date" layoutX="213.0" layoutY="24.0" prefHeight="35.0" prefWidth="179.0" promptText="Дата доходу" style="-fx-background-color: #66a5ad;" />
+                              <Button fx:id="SaveButton" layoutX="213.0" layoutY="109.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Зберегти" textFill="WHITE">
+                                 <font>
+                                    <Font name="Comic Sans MS" size="17.0" />
+                                 </font>
+                              </Button>
+                              <MenuButton fx:id="incomeTypeMenuButton" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Вид доходу" textAlignment="CENTER" textFill="WHITE">
+                                <items>
+                                  <MenuItem fx:id="salaryMenuItem" mnemonicParsing="false" style="-fx-background-color: #66a5ad;" text="Заробітня плата" />
+                                  <MenuItem fx:id="giftMenuItem" mnemonicParsing="false" style="-fx-background-color: #c4dfe6;" text="Подарунок" />
+                                    <MenuItem fx:id="stateAidMenuItem" mnemonicParsing="false" style="-fx-background-color: #66a5ad;" text="Державна допомога" />
+                                    <MenuItem fx:id="creditMenuItem" mnemonicParsing="false" style="-fx-background-color: #c4dfe6;" text="Кредит" />
+                                </items>
+                                 <font>
+                                    <Font name="Comic Sans MS" size="17.0" />
+                                 </font>
+                              </MenuButton>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab style="-fx-background-color: #c4dfe6;" text="Видаток">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <DatePicker fx:id="date1" layoutX="213.0" layoutY="24.0" prefHeight="35.0" prefWidth="179.0" promptText="Дата витрати" style="-fx-background-color: #66a5ad;" />
+                              <TextField fx:id="amount1" layoutX="412.0" layoutY="24.0" prefHeight="35.0" prefWidth="179.0" promptText="Сумма витрати" style="-fx-background-radius: 15; -fx-background-color: #66a5ad;">
+                                 <font>
+                                    <Font name="Comic Sans MS" size="17.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="SaveButton1" layoutX="213.0" layoutY="109.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Зберегти" textFill="WHITE">
+                                 <font>
+                                    <Font name="Comic Sans MS" size="17.0" />
+                                 </font>
+                              </Button>
+                              <MenuButton fx:id="expenseTypeMenuButton" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Вид витрат" textAlignment="CENTER" textFill="WHITE">
+                                 <items>
+                                    <MenuItem fx:id="mediaMenuItem" mnemonicParsing="false" style="-fx-background-color: #66a5ad;" text="Медіа, розваги, зв’язок" />
+                                    <MenuItem fx:id="utilitiesMenuItem" mnemonicParsing="false" style="-fx-background-color: #c4dfe6;" text="Комунальні послуги" />
+                                    <MenuItem fx:id="transportationMenuItem" mnemonicParsing="false" style="-fx-background-color: #66a5ad;" text="Витрати на транспорт" />
+                                    <MenuItem fx:id="foodMenuItem" mnemonicParsing="false" style="-fx-background-color: #c4dfe6;" text="Харчування" />
+                                    <MenuItem fx:id="industrialGoodsMenuItem" mnemonicParsing="false" style="-fx-background-color: #66a5ad;" text="Промислові товари" />
+                                    <MenuItem fx:id="hygieneMedicineMenuItem" mnemonicParsing="false" style="-fx-background-color: #c4dfe6;" text="Гігієна та медицина" />
+                                    <MenuItem fx:id="loanRepaymentMenuItem" mnemonicParsing="false" style="-fx-background-color: #66a5ad;" text="Погашення кредиту" />
+                                    <MenuItem fx:id="householdExpensesMenuItem" mnemonicParsing="false" style="-fx-background-color: #c4dfe6;" text="Господарські витрати" />
+                                 </items>
+                                 <font>
+                                    <Font name="Comic Sans MS" size="17.0" />
+                                 </font>
+                              </MenuButton>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+      <Label layoutX="32.0" layoutY="24.0" prefHeight="38.0" prefWidth="353.0" text="Financial Management" textFill="WHITE">
+         <font>
+            <Font name="Georgia" size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="492.0" layoutY="24.0" prefHeight="39.0" prefWidth="176.0" text="Введення даних" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="450.0" mnemonicParsing="false" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Повернутися назад" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitBtn11" layoutX="506.0" layoutY="450.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Вихід" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="17.0" />
+         </font>
+      </Button>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

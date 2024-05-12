@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #003b46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.finance.FourthController">
+   <children>
+      <AnchorPane layoutY="70.0" prefHeight="360.0" prefWidth="700.0" style="-fx-background-color: #fafafa; -fx-background-radius: 15;">
+         <children>
+            <TableView fx:id="financeTable" layoutX="25.0" layoutY="96.0" prefHeight="250.0" prefWidth="658.0" style="-fx-background-radius: 15;">
+               <columns>
+                  <TableColumn fx:id="IdColumn" prefWidth="82.79996490478516" style="-fx-background-color: #c4dfe6; -fx-background-radius: 15;" text="ID" />
+                  <TableColumn fx:id="typeColumn" prefWidth="318.00000762939453" style="-fx-background-color: #c4dfe6; -fx-background-radius: 15;" text="Тип" />
+                  <TableColumn fx:id="amountColumn" minWidth="0.0" prefWidth="138.39993286132812" style="-fx-background-radius: 15; -fx-background-color: #c4dfe6;" text="Сума" />
+                  <TableColumn fx:id="dateColumn" prefWidth="115.60003662109375" style="-fx-background-radius: 15; -fx-background-color: #c4dfe6;" text="Дата" />
+               </columns>
+            </TableView>
+            <Label layoutX="25.0" layoutY="14.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Прибуток:" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font></Label>
+            <Label fx:id="incomeLabel" layoutX="125.0" layoutY="14.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font></Label>
+            <Label layoutX="25.0" layoutY="46.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Витрати:" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font></Label>
+            <Label fx:id="expenseLabel" layoutX="125.0" layoutY="46.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font></Label>
+            <Label layoutX="25.0" layoutY="74.0" prefHeight="21.0" prefWidth="86.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Загальний:" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font></Label>
+            <Label fx:id="totalLabel" layoutX="125.0" layoutY="74.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="32.0" layoutY="24.0" prefHeight="38.0" prefWidth="353.0" text="Financial Management" textFill="WHITE">
+         <font>
+            <Font name="Georgia" size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="492.0" layoutY="24.0" prefHeight="39.0" prefWidth="176.0" text="Отримання звітів" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="450.0" mnemonicParsing="false" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Повернутися назад" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitBtn11" layoutX="506.0" layoutY="450.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Вихід" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="17.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

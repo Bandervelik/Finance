@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #003b46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.finance.SecondController">
+   <children>
+      <AnchorPane layoutX="50.0" layoutY="100.0" prefHeight="339.0" prefWidth="600.0" style="-fx-background-color: #c4dfe6; -fx-background-radius: 15;" styleClass="rad">
+         <children>
+            <Button fx:id="zvitBtn" layoutX="364.0" layoutY="72.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="188.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Отримати звіт" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="enterBtn" layoutX="48.0" layoutY="72.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="188.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Ввести дані" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="zilBtn" layoutX="206.0" layoutY="187.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="188.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Задання цілей" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label layoutX="32.0" layoutY="24.0" prefHeight="38.0" prefWidth="353.0" text="Financial Management" textFill="WHITE">
+         <font>
+            <Font name="Georgia" size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="exitBtn11" layoutX="506.0" layoutY="450.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: #07575b; -fx-background-radius: 15;" text="Вихід" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="508.0" layoutY="24.0" prefHeight="39.0" prefWidth="176.0" style="-fx-background-radius: 15;" text="Головний екран" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="21.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -9,9 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class FifthController extends Application {
 
@@ -24,7 +26,7 @@ public class FifthController extends Application {
         stage.setTitle("Financial Management");
         stage.setScene(scene);
         stage.show();}
-
+    DatabaseHandler dbHandler = new DatabaseHandler();
     @FXML
     private Button zvitBtn;
 
@@ -34,6 +36,14 @@ public class FifthController extends Application {
     @FXML
     private Button geBtn;
 
+    @FXML
+    private Button saveGoalBtn;
+
+    @FXML
+    private TextField goalAmountField;
+
+    @FXML
+    private TextField goalTypeField;
     @FXML
     private Button exitBtn11;
 
@@ -47,7 +57,9 @@ public class FifthController extends Application {
             // Відкриття нової сцени при натисканні кнопки "Назад"
             openNewScene("app.fxml", userId);
         });
-
+        saveGoalBtn.setOnAction(event -> {
+            saveGoal(userId);
+        });
         // Обробник події для кнопки "Вихід"
         if (exitBtn11 != null) {
             exitBtn11.setOnAction(event -> {
@@ -79,5 +91,27 @@ public class FifthController extends Application {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private void saveGoal(int userId) {
+
+        String type = goalTypeField.getText();
+        String amountText = goalAmountField.getText();
+        // Перевірка, чи всі поля заповнені
+        if (type.isEmpty() || amountText.isEmpty()) {
+            showAlert("Помилка", "Відсутні дані", "Будь ласка, заповніть усі поля.");
+            return;
+        }
+
+        try {
+            double amountValue = Double.parseDouble(amountText);
+            // Створення об'єкта доходу з отриманими даними
+            Goals goals = new Goals(userId, type, amountValue);
+            // Збереження доходу в базу даних
+            dbHandler.addGoals(goals);
+            showAlert("Успіх", "Дохід збережено", "Інформацію про прибуток успішно збережено.");
+        } catch (NumberFormatException e) {
+            showAlert("Помилка", "Неправильна сума", "Будь ласка, введіть правильну суму для доходу.");
+        }
     }
 }

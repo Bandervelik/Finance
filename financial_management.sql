@@ -1,0 +1,1 @@
+usersSELECT * FROM financial_management.income;
