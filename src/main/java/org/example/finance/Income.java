@@ -1,60 +1,76 @@
 package org.example.finance;
 
 public class Income {
-    private Integer id;
-    private Integer userId;
-    private String type;
-    private Double amount;
-    private String date;
+    private int idincome;
+    private int idusers;
+    private String type_i;
+    private double amount_i;
+    private String date_i;
 
-    public Income(Integer userId, String type, Double amount, String date) {
-        this.userId = userId;
-        this.type = type;
-        this.amount = amount;
-        this.date = date;
+    public Income(int idincome, int idusers, String type_i, double amount_i, String date_i) {
+        this.idincome = idincome;
+        this.idusers = idusers;
+        this.type_i = type_i;
+        this.amount_i = amount_i;
+        this.date_i = date_i;
     }
 
-    public Income() {
+    public Income(Income other) {
+        this.idincome = other.getId();
+        this.idusers = other.getidusers();
+        this.type_i = other.gettype_i();
+        this.amount_i = other.getamount_i();
+        this.date_i = other.getdate_i();
     }
 
-    public String gettype() {
-        return type;
+    public int getId() {
+        return idincome;
     }
 
-    public void settype(String type) {
-        this.type = type;
+    public void setidincome(int idincome) {
+        this.idincome = idincome;
     }
 
-    public Double getamount() {
-        return amount;
+    public int getidusers() {
+        return idusers;
     }
 
-    public void setamount(Double amount) {
-        this.amount = amount;
+    public void setidusers(int idusers) {
+        this.idusers = idusers;
     }
 
-    public String getdate() {
-        return date;
+    public String gettype_i() {
+        return type_i;
     }
 
-    public void setdate(String date) {
-        this.date = date;
+    public void settype_i(String type_i) {
+        this.type_i = type_i;
     }
 
-    public Integer getid() {
-        return id;
+    public double getamount_i() {
+        return amount_i;
     }
 
-    public void setid(Integer password) {
-        this.id = id;
+    public void setamount_i(double amount_i) {
+        this.amount_i = amount_i;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getdate_i() {
+        return date_i;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setdate_i(String date_i) {
+        this.date_i = date_i;
     }
 
+    @Override
+    public String toString() {
+        return "Income{" +
+                "idincome=" + idincome +
+                ", idusers=" + idusers +
+                ", type_i='" + type_i + '\'' +
+                ", amount_i_i=" + amount_i +
+                ", date_i_i='" + date_i + '\'' +
+                '}';
+    }
 }

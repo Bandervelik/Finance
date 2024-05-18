@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class SecondController extends Application {
 
-    private int userId;
+    private int idusers;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -22,7 +22,8 @@ public class SecondController extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 700, 500);
         stage.setTitle("Financial Management");
         stage.setScene(scene);
-        stage.show();}
+        stage.show();
+    }
 
     @FXML
     private Button zvitBtn;
@@ -49,18 +50,18 @@ public class SecondController extends Application {
 
     private void initializeButtonHandlers() {
         if (backBtn != null) {
-            backBtn.setOnAction(event -> loadNewScene("hello-view.fxml", userId));
+            backBtn.setOnAction(event -> loadNewScene("hello-view.fxml", idusers));
         }
 
         if (enterBtn != null) {
-            enterBtn.setOnAction(event -> loadNewScene("app_2.fxml", userId));
+            enterBtn.setOnAction(event -> loadNewScene("app_2.fxml", idusers));
         }
 
         if (zvitBtn != null) {
-            zvitBtn.setOnAction(event -> loadNewScene("app_3.fxml", userId));
+            zvitBtn.setOnAction(event -> loadNewScene("app_3.fxml", idusers));
         }
         if (zilBtn != null) {
-            zilBtn.setOnAction(event -> loadNewScene("app_4.fxml", userId));
+            zilBtn.setOnAction(event -> loadNewScene("app_4.fxml", idusers));
         }
         if (exitBtn11 != null) {
             exitBtn11.setOnAction(event -> {
@@ -69,7 +70,7 @@ public class SecondController extends Application {
         }
     }
 
-    private void loadNewScene(String fxmlFile, int userId) {
+    private void loadNewScene(String fxmlFile, int idusers) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
@@ -90,4 +91,7 @@ public class SecondController extends Application {
         alert.showAndWait();
     }
 
+    public void setIdusers(int idusers) {
+        this.idusers = idusers;
+    }
 }

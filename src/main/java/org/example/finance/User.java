@@ -1,20 +1,35 @@
 package org.example.finance;
 
 public class User {
-    private Integer userId;
+    private int idusers;
     private String firstName;
     private String lastName;
-    private String userName;
+    private String username;
     private String password;
 
-    public User(String firstName, String lastName, String userName, String password) {
+    public User(int idusers, String firstName, String lastName, String username, String password) {
+        this.idusers = idusers;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
     }
 
-    public User() {}
+    public User(User other) {
+        this.idusers = other.getidusers();
+        this.firstName = other.getFirstName();
+        this.lastName = other.getLastName();
+        this.username = other.getUsername();
+        this.password = other.getPassword();
+    }
+
+    public int getidusers() {
+        return idusers;
+    }
+
+    public void setidusers(int idusers) {
+        this.idusers = idusers;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -32,12 +47,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -48,12 +63,14 @@ public class User {
         this.password = password;
     }
 
-    public Integer getUserId() {
-        return userId;
+    @Override
+    public String toString() {
+        return "User{" +
+                "idusers=" + idusers +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
 }

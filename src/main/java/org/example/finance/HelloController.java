@@ -5,8 +5,10 @@ import java.net.URL;
 import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.finance.animation.Shake;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -22,7 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class HelloController extends Application {
 
-    private int userId;
+    private int idusers;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -56,7 +58,7 @@ public class HelloController extends Application {
         authSignInButton.setOnAction(event -> {
             String loginText = login_field.getText().trim();
             String loginPassword = password_field.getText().trim();
-
+            setidusers(idusers);
             if(!loginText.equals("") && !loginPassword.equals("")){
                 loginUser(loginText, loginPassword);
             } else{
@@ -74,14 +76,14 @@ public class HelloController extends Application {
         });
 
         loginSignUpButton.setOnAction(event -> {
-            openNewScene("signUp.fxml", userId);
+            openNewScene("signUp.fxml", idusers);
         });
     }
 
     private void loginUser(String loginText, String loginPassword) {
         DatabaseHandler dbHandler = new DatabaseHandler();
-        User user = new User();
-        user.setUserName(loginText);
+        User user = new User(0, loginText, "", "", loginPassword);
+        user.setUsername(loginText);
         user.setPassword(loginPassword);
         ResultSet result = dbHandler.getUser(user);
 
@@ -97,7 +99,7 @@ public class HelloController extends Application {
         }
 
         if(counter >= 1) {
-            openNewScene("app.fxml", userId);
+            openNewScene("app.fxml", this.idusers);
         } else {
             Shake userLoginAnim = new Shake(login_field);
             Shake userPassAnim = new Shake(password_field);
@@ -106,21 +108,36 @@ public class HelloController extends Application {
         }
     }
 
-    public void openNewScene(String window, int userId) {
+    public void openNewScene(String window, int idusers) {
         loginSignUpButton.getScene().getWindow().hide();
-        FXMLLoader fxmlLoader = new FXMLLoader(SignUpController.class.getResource(window));
+        FXMLLoader loader = new FXMLLoader(SignUpController.class.getResource(window));
 
         try {
-            fxmlLoader.load();
+            loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        Parent root = fxmlLoader.getRoot();
+        if (window.equals("app_2.fxml")) {
+            ThirdController thirdController = loader.getController();
+            thirdController.setidusers(idusers);
+        }
+        if (window.equals("user_panel.fxml")) {
+            FifthController fifthController = loader.getController();
+            fifthController.setidusers(idusers);
+        }
+
+        Parent root = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    public void setidusers(int idusers) {
+        this.idusers = idusers;
+        DatabaseHandler dbHandler = new DatabaseHandler();
+    }
+
     public static void main(String[] args) {
         launch();
     }

@@ -1,57 +1,76 @@
 package org.example.finance;
 
 public class Expense {
-    private int id;
-    private int userId;
-    private String type1;
-    private Double amount1;
-    private String date1;
+    private int idexpense;
+    private int idusers;
+    private String type_e;
+    private double amount_e;
+    private String date_e;
 
-    public Expense(int userId, String type1, Double amount1, String date1) {
-        this.userId = userId;
-        this.type1 = type1;
-        this.amount1 = amount1;
-        this.date1 = date1;
-    }
-    public Expense() {}
-
-    public String gettype1() {
-        return type1;
+    public Expense(int idexpense, int idusers, String type_e, double amount_e, String date_e) {
+        this.idexpense = idexpense;
+        this.idusers = idusers;
+        this.type_e = type_e;
+        this.amount_e = amount_e;
+        this.date_e = date_e;
     }
 
-    public void settype1(String type1) {
-        this.type1 = type1;
+    public Expense(Expense other) {
+        this.idexpense = other.getidexpense();
+        this.idusers = other.getidusers();
+        this.type_e = other.gettype_e();
+        this.amount_e = other.getamount_e();
+        this.date_e = other.getdate_e();
     }
 
-    public Double getamount1() {
-        return amount1;
+    public int getidexpense() {
+        return idexpense;
     }
 
-    public void setamount1(Double amount1) {
-        this.amount1 = amount1;
+    public void setidexpense(int idexpense) {
+        this.idexpense = idexpense;
     }
 
-    public String getdate1() {
-        return date1;
+    public int getidusers() {
+        return idusers;
     }
 
-    public void setdate1(String date1) {
-        this.date1 = date1;
+    public void setidusers(int idusers) {
+        this.idusers = idusers;
     }
 
-    public Integer getid() {
-        return id;
+    public String gettype_e() {
+        return type_e;
     }
 
-    public void setid(Integer password) {
-        this.id = id;}
-
-    public int getUserId() {
-        return userId;
+    public void settype_e(String type_e) {
+        this.type_e = type_e;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public double getamount_e() {
+        return amount_e;
     }
 
+    public void setamount_e(double amount_e) {
+        this.amount_e = amount_e;
+    }
+
+    public String getdate_e() {
+        return date_e;
+    }
+
+    public void setdate_e(String date_e) {
+        this.date_e = date_e;
+    }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "idexpense=" + idexpense +
+                ", idusers=" + idusers +
+                ", type_e='" + type_e + '\'' +
+                ", amount_e=" + amount_e +
+                ", date_e='" + date_e + '\'' +
+                '}';
+    }
 }

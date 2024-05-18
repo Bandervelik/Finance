@@ -12,9 +12,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 
+
 public class ThirdController extends Application {
 
-    private int userId;
+    private int idusers;
 
     @FXML
     private Button enterBtn;
@@ -68,11 +69,11 @@ public class ThirdController extends Application {
     void initialize() {
 
         SaveButton.setOnAction(event -> {
-            saveIncome(userId);
+            saveIncome();
         });
 
         SaveButton1.setOnAction(event -> {
-            saveExpense(userId);
+            saveExpense();
         });
 
         backBtn.setOnAction(event -> {
@@ -97,19 +98,29 @@ public class ThirdController extends Application {
             });
         }
     }
+
     DatabaseHandler dbHandler = new DatabaseHandler();
-    private void openNewScene(String fxmlFile) {
+
+    private void openNewScene(String window) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(window));
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
+            loader.load();
+            Parent root = loader.getRoot();
             Stage stage = (Stage) backBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
+
+            if (window.equals("hello-view.fxml")) {
+                HelloController helloController = loader.getController();
+                helloController.setidusers(idusers);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Помилка", "Помилка завантаження FXML", "Під час завантаження файлу FXML сталася помилка.");
         }
     }
+
 
     private void showAlert(String title, String header, String content) {
         Alert alert = new Alert(AlertType.ERROR);
@@ -119,9 +130,7 @@ public class ThirdController extends Application {
         alert.showAndWait();
     }
 
-    private void saveExpense(int userId) {
-
-
+    private void saveExpense() {
         String type = expenseTypeMenuButton.getText();
         String amount1Text = amount1.getText();
         LocalDate localDate1 = date1.getValue();
@@ -135,9 +144,9 @@ public class ThirdController extends Application {
 
         try {
             double amount1Value = Double.parseDouble(amount1Text);
-            // Створення об'єкта доходу з отриманими даними
-            Expense expense = new Expense(userId, type, amount1Value, date1String);
-            // Збереження доходу в базу даних
+            // Створення об'єкта витрати з отриманими даними
+            Expense expense = new Expense(0, idusers, type, amount1Value, date1String); // idexpense = 0, оскільки це автоматично згенерований ключ
+            // Збереження витрати в базу даних
             dbHandler.addExpense(expense);
             showAlert("Успіх", "Витрати збережено", "Інформацію про витрату успішно збережено.");
         } catch (NumberFormatException e) {
@@ -145,8 +154,7 @@ public class ThirdController extends Application {
         }
     }
 
-    private void saveIncome(int userId) {
-
+    private void saveIncome() {
         String type = incomeTypeMenuButton.getText();
         String amountText = amount.getText();
         LocalDate localDate = date.getValue();
@@ -161,7 +169,7 @@ public class ThirdController extends Application {
         try {
             double amountValue = Double.parseDouble(amountText);
             // Створення об'єкта доходу з отриманими даними
-            Income income = new Income(userId, type, amountValue, dateString);
+            Income income = new Income(0, idusers, type, amountValue, dateString); // idincome = 0, оскільки це автоматично згенерований ключ
             // Збереження доходу в базу даних
             dbHandler.addIncome(income);
             showAlert("Успіх", "Дохід збережено", "Інформацію про прибуток успішно збережено.");
@@ -170,6 +178,11 @@ public class ThirdController extends Application {
         }
     }
 
+    public void setidusers(int idusers) {
+        this.idusers = idusers;
+    }
 
-
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 public class FourthController extends Application {
 
-    private int userId;
+    private int idusers;
 
     @FXML
     private TableView<Transaction> financeTable;
@@ -69,41 +69,70 @@ public class FourthController extends Application {
         exitBtn11.setOnAction(event -> {
             System.exit(0);
         });
-
-        loadTransactions();
     }
 
-    private void loadTransactions() {
+    public void addTableData(ResultSet tableData) {
         try {
-            DatabaseHandler dbHandler = new DatabaseHandler();
-            ResultSet incomeResult = dbHandler.getIncome(userId);
-            ResultSet expenseResult = dbHandler.getExpense(userId);
-
             double incomeTotal = 0.0;
             double expenseTotal = 0.0;
 
             financeTable.getItems().clear();
 
-            while (incomeResult.next()) {
+            while (tableData.next()) {
                 Transaction transaction = new Transaction(
-                        incomeResult.getInt("idincome"),
-                        incomeResult.getString("type"),
-                        incomeResult.getDouble("amount"),
-                        incomeResult.getString("date")
+                        tableData.getInt("idincome"),
+                        tableData.getString("type"),
+                        tableData.getDouble("amount"),
+                        tableData.getString("date")
                 );
                 financeTable.getItems().add(transaction);
-                incomeTotal += incomeResult.getDouble("amount");
+
+                if (transaction.getAmount() >= 0) {
+                    incomeTotal += transaction.getAmount();
+                } else {
+                    expenseTotal += transaction.getAmount();
+                }
             }
 
-            while (expenseResult.next()) {
+            incomeLabel.setText(Double.toString(incomeTotal));
+            expenseLabel.setText(Double.toString(expenseTotal));
+            totalLabel.setText(Double.toString(incomeTotal - expenseTotal));
+
+        } catch (SQLException e) {
+            showAlert("Error", "Database Error", "An error occurred while accessing the database.");
+        }
+    }
+
+    public void setidusers(int idusers) {
+        this.idusers = idusers;
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        ResultSet incomeResult = dbHandler.getIncome();
+        ResultSet expenseResult = dbHandler.getExpense(idusers);
+        populateTableData(incomeResult);
+        populateTableData(expenseResult);
+    }
+
+    public void populateTableData(ResultSet tableData) {
+        try {
+            double incomeTotal = 0.0;
+            double expenseTotal = 0.0;
+
+            financeTable.getItems().clear();
+
+            while (tableData.next()) {
                 Transaction transaction = new Transaction(
-                        expenseResult.getInt("idexpense"),
-                        expenseResult.getString("type"),
-                        -expenseResult.getDouble("amount"), // у витратах від'ємне значення
-                        expenseResult.getString("date")
+                        tableData.getInt("id"), // assuming the column name for ID
+                        tableData.getString("type"), // assuming the column name for type
+                        tableData.getDouble("amount"),
+                        tableData.getString("date")
                 );
                 financeTable.getItems().add(transaction);
-                expenseTotal += expenseResult.getDouble("amount");
+
+                if (transaction.getAmount() >= 0) {
+                    incomeTotal += transaction.getAmount();
+                } else {
+                    expenseTotal += transaction.getAmount();
+                }
             }
 
             incomeLabel.setText(Double.toString(incomeTotal));

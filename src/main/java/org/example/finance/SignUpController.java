@@ -1,23 +1,26 @@
 package org.example.finance;
 
 import javafx.application.Application;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class SignUpController extends Application {
 
-    private int userId; // Зберігатиме ідентифікатор користувача
+    private int idusers; // Зберігатиме ідентифікатор користувача
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -56,7 +59,7 @@ public class SignUpController extends Application {
         });
 
         backBtn.setOnAction(event -> { // Обробник подій для кнопки "Назад"
-            openNewScene("hello-view.fxml", userId);
+            openNewScene("hello-view.fxml", idusers);
         });
 
         exitBtn11.setOnAction(event -> {
@@ -78,7 +81,7 @@ public class SignUpController extends Application {
             return;
         }
 
-        User user = new User(firstName, lastName, userName, password);
+        User user = new User(idusers, firstName, lastName, userName, password);
         ResultSet userRow = dbHandler.getUser(user);
 
         try {
@@ -86,10 +89,11 @@ public class SignUpController extends Application {
                 dbHandler.signUpUser(user);
                 // Отримання ідентифікатора користувача після реєстрації
                 ResultSet resSet = dbHandler.getUser(user);
+                int idusers = 0;
                 while (resSet.next()) {
-                    userId = resSet.getInt("idusers");
+                    idusers = resSet.getInt("idusers");
                 }
-                openNewScene("app.fxml", userId);
+                openNewScene("app.fxml", idusers);
             } else {
                 showAlert("Реєстрація", null, "Користувач вже зареєстрований.");
             }
@@ -106,7 +110,7 @@ public class SignUpController extends Application {
         alert.showAndWait();
     }
 
-    public void openNewScene(String window, int userId) {
+    public void openNewScene(String window, int idusers) {
         signUpButton.getScene().getWindow().hide();
 
         FXMLLoader loader = new FXMLLoader();
@@ -118,14 +122,20 @@ public class SignUpController extends Application {
             e.printStackTrace();
         }
 
+        if (window.equals("app_2.fxml")) {
+            ThirdController third = loader.getController();
+            third.setidusers(idusers);
+        }
+
         Parent root = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
     }
 
     // Метод для отримання ідентифікатора користувача після реєстрації
-    public int getUserId() {
-        return userId;
+    public int getidusers() {
+        return idusers;
     }
 }

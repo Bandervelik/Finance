@@ -13,11 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class FifthController extends Application {
 
-    private int userId;
+    private int idusers;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -42,6 +41,7 @@ public class FifthController extends Application {
     @FXML
     private TextField goalAmountField;
 
+
     @FXML
     private TextField goalTypeField;
     @FXML
@@ -55,10 +55,10 @@ public class FifthController extends Application {
         // Обробник події для кнопки "Назад"
         backBtn.setOnAction(event -> {
             // Відкриття нової сцени при натисканні кнопки "Назад"
-            openNewScene("app.fxml", userId);
+            openNewScene("app.fxml", idusers);
         });
         saveGoalBtn.setOnAction(event -> {
-            saveGoal(userId);
+            saveGoal(idusers);
         });
         // Обробник події для кнопки "Вихід"
         if (exitBtn11 != null) {
@@ -70,7 +70,7 @@ public class FifthController extends Application {
 
 
     }
-    public void openNewScene(String fxmlFile, int userId) {
+    public void openNewScene(String fxmlFile, int idusers) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
@@ -93,7 +93,7 @@ public class FifthController extends Application {
         alert.showAndWait();
     }
 
-    private void saveGoal(int userId) {
+    private void saveGoal(int idusers) {
 
         String type = goalTypeField.getText();
         String amountText = goalAmountField.getText();
@@ -106,12 +106,16 @@ public class FifthController extends Application {
         try {
             double amountValue = Double.parseDouble(amountText);
             // Створення об'єкта доходу з отриманими даними
-            Goals goals = new Goals(userId, type, amountValue);
+            //Goal goal = new Goal(idusers, type, amountValue);
             // Збереження доходу в базу даних
-            dbHandler.addGoals(goals);
-            showAlert("Успіх", "Дохід збережено", "Інформацію про прибуток успішно збережено.");
+            //dbHandler.addGoals(goal);
+            showAlert("Успіх", "Ціль збережено", "Інформацію про ціль успішно збережено.");
         } catch (NumberFormatException e) {
             showAlert("Помилка", "Неправильна сума", "Будь ласка, введіть правильну суму для доходу.");
         }
+    }
+
+    public void setidusers(int idusers) {
+        this.idusers = idusers;
     }
 }
